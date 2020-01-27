@@ -20,7 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// Package coverallsapi contains structs and functions to deal with Coveralls API
 package coveralls
 
 import (
