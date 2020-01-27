@@ -24,10 +24,10 @@ import (
     "fmt"
     "log"
 
-    "github.com/loadsmart/go-coveralls-api/coverallsapi"
+    "github.com/loadsmart/go-coveralls-api"
 )
 
-client := coverallsapi.NewClient("your-personal-access-token")
+client := coveralls.NewClient("your-personal-access-token")
 repo, err := client.Repositories.Get(context.Background(), "github", "user/repository"))
 if err != nil {
     log.Fatalf("Error querying Coveralls API: %s\n", err)

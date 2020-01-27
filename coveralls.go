@@ -21,7 +21,7 @@ SOFTWARE.
 */
 
 // Package coverallsapi contains structs and functions to deal with Coveralls API
-package coverallsapi
+package coveralls
 
 import (
 	"fmt"
