@@ -48,7 +48,20 @@ type RepositoryConfig struct {
 	CommitStatusFailChangeThreshold float64 `json:"commit_status_fail_change_threshold,omitempty"` // If coverage decreases, the maximum allowed amount of decrease that will be allowed for the build to pass (default is null, meaning that any decrease is a failure)
 }
 
-// Get information about a repository already in Coveralls
+// Get information about a repository already in Coveralls.
+//
+// Ctx is a context that's propagated to underlying client. You can use
+// it to cancel the request in progress (when the program is terminated,
+// for example).
+//
+// Svc indicates the service. Any value accepted by Coveralls API can be
+// passed here. Soma valid inputs include 'github', 'bitbucket' or 'manual'.
+//
+// Repo is the repository name. In GitHub, for example, this is
+// 'organization/repository'; other services could have different formats.
+//
+// If the request suceeded, it returns a Repository with the information
+// available or an error if there was something wrong.
 func (s *RepositoryService) Get(ctx context.Context, svc string, repo string) (*Repository, error) {
 	url := fmt.Sprintf("%s/repos/%s/%s", s.client.baseURL, svc, repo)
 
