@@ -33,12 +33,13 @@ const (
 	defaultBaseURL = "https://coveralls.io/api"
 )
 
+// Client is used to provide a single interface to interact with Coveralls API
 type Client struct {
 	client  *resty.Client
-	baseURL *url.URL
-	common  service
+	baseURL *url.URL // Base URL for Coveralls API
+	common  service  // Share the same client instance among all services
 
-	Repositories *RepositoryService
+	Repositories *RepositoryService // Service to interact with repository-related endpoints
 }
 
 type service struct {

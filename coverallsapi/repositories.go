@@ -27,8 +27,10 @@ import (
 	"fmt"
 )
 
+// RepositoryService holds information to access repository-related endpoints
 type RepositoryService service
 
+// Repository holds information about one specific repository
 type Repository struct {
 	ID       int    `json:"id,omitempty"`
 	Name     string `json:"name,omitempty"`
@@ -36,6 +38,7 @@ type Repository struct {
 	Token    string `json:"token,omitempty"`
 }
 
+// RepositoryConfig represents config settings for a given repository
 type RepositoryConfig struct {
 	Service                         string  `json:"service"`                                       // Git provider. Options include: github, bitbucket, gitlab, stash, manual
 	Name                            string  `json:"name"`                                          // Name of the repo. E.g. with Github, this is username/reponame.
