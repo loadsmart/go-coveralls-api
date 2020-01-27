@@ -1,5 +1,7 @@
 # go-coveralls-api
 
+[![GoDoc](https://godoc.org/github.com/loadsmart/go-coveralls-api?status.svg)](https://godoc.org/github.com/loadsmart/go-coveralls-api)
+
 Client for [Coveralls API][] written in Go.
 
 **Note**: the goal is to interact with administrative Coveralls API. To send coverage data, take a look at [goveralls][] project.
