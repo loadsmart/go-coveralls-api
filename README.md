@@ -1,5 +1,6 @@
 # go-coveralls-api
 
+[![Coverage Status](https://coveralls.io/repos/github/loadsmart/go-coveralls-api/badge.svg?branch=master)](https://coveralls.io/github/loadsmart/go-coveralls-api?branch=master)
 [![GoDoc](https://godoc.org/github.com/loadsmart/go-coveralls-api?status.svg)](https://godoc.org/github.com/loadsmart/go-coveralls-api)
 
 Client for [Coveralls API][] written in Go.
