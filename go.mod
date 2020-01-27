@@ -1,4 +1,4 @@
-module github.com/rcmachado/go-coveralls-api
+module github.com/loadsmart/go-coveralls-api
 
 go 1.13
 
