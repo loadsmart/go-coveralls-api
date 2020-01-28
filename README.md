@@ -31,12 +31,12 @@ import (
 )
 
 client := coveralls.NewClient("your-personal-access-token")
-repo, err := client.Repositories.Get(context.Background(), "github", "user/repository"))
+repository, err := client.Repositories.Get(context.Background(), "github", "user/repository")
 if err != nil {
     log.Fatalf("Error querying Coveralls API: %s\n", err)
 }
 
-fmt.Printf("Project has ID %s in Coveralls", resp.ID)
+fmt.Printf("Project has ID %d in Coveralls", repository.ID)
 ```
 
 Replace `your-personal-access-token` with your personal access token (can be found in your Coveralls account page).

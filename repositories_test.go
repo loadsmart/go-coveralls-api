@@ -25,6 +25,8 @@ package coveralls
 import (
 	"context"
 	"encoding/json"
+	"fmt"
+	"log"
 	"net/http"
 	"testing"
 
@@ -86,4 +88,16 @@ func TestRepositoryServiceAdd(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.Equal(t, repositoryConfig, result)
+}
+
+func ExampleRepositoryService_Get() {
+	// Instantiate the client with your _personal access token_
+	client := NewClient("your-personal-access-token")
+	// This returns information about a specific repository
+	repository, err := client.Repositories.Get(context.Background(), "github", "user/repository")
+	if err != nil {
+		log.Fatalf("Error querying Coveralls API: %s\n", err)
+	}
+
+	fmt.Printf("Project has ID %d in Coveralls", repository.ID)
 }
