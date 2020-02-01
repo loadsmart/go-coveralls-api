@@ -40,12 +40,12 @@ type Repository struct {
 
 // RepositoryConfig represents config settings for a given repository
 type RepositoryConfig struct {
-	Service                         string  `json:"service"`                                       // Git provider. Options include: github, bitbucket, gitlab, stash, manual
-	Name                            string  `json:"name"`                                          // Name of the repo. E.g. with Github, this is username/reponame.
-	CommentOnPullRequests           bool    `json:"comment_on_pull_requests,omitempty"`            // Whether comments should be posted on pull requests (defaults to true)
-	SendBuildStatus                 bool    `json:"send_build_status,omitempty"`                   // Whether build status should be sent to the git provider (defaults to true)
-	CommitStatusFailThreshold       float64 `json:"commit_status_fail_threshold,omitempty"`        // Minimum coverage that must be present on a build for the build to pass (default is null, meaning any decrease is a failure)
-	CommitStatusFailChangeThreshold float64 `json:"commit_status_fail_change_threshold,omitempty"` // If coverage decreases, the maximum allowed amount of decrease that will be allowed for the build to pass (default is null, meaning that any decrease is a failure)
+	Service                         string   `json:"service"`                             // Git provider. Options include: github, bitbucket, gitlab, stash, manual
+	Name                            string   `json:"name"`                                // Name of the repo. E.g. with Github, this is username/reponame.
+	CommentOnPullRequests           bool     `json:"comment_on_pull_requests"`            // Whether comments should be posted on pull requests (defaults to true)
+	SendBuildStatus                 bool     `json:"send_build_status"`                   // Whether build status should be sent to the git provider (defaults to true)
+	CommitStatusFailThreshold       *float64 `json:"commit_status_fail_threshold"`        // Minimum coverage that must be present on a build for the build to pass (default is null, meaning any decrease is a failure)
+	CommitStatusFailChangeThreshold *float64 `json:"commit_status_fail_change_threshold"` // If coverage decreases, the maximum allowed amount of decrease that will be allowed for the build to pass (default is null, meaning that any decrease is a failure)
 }
 
 // Get information about a repository already in Coveralls.

@@ -56,13 +56,14 @@ func TestRepositoryServiceGet(t *testing.T) {
 }
 
 func TestRepositoryServiceAdd(t *testing.T) {
+	failThreshold := 10.3
 	repositoryConfig := &RepositoryConfig{
 		Service:                         "github",
 		Name:                            "user/fakerepo",
 		CommentOnPullRequests:           true,
 		SendBuildStatus:                 false,
-		CommitStatusFailThreshold:       10.3,
-		CommitStatusFailChangeThreshold: 9.1,
+		CommitStatusFailThreshold:       &failThreshold,
+		CommitStatusFailChangeThreshold: nil,
 	}
 	fakeUrl := "https://coveralls.io/api/repos"
 	httpmock.RegisterResponder("POST", fakeUrl, func(req *http.Request) (*http.Response, error) {
@@ -90,6 +91,33 @@ func TestRepositoryServiceAdd(t *testing.T) {
 	assert.Equal(t, repositoryConfig, result)
 }
 
+func TestRepositoryConfigMarshall(t *testing.T) {
+	var testCases = []struct {
+		name string
+		in   RepositoryConfig
+		out  string
+	}{
+		{
+			name: "simple",
+			in:   RepositoryConfig{Service: "github", Name: "user/fakerepo"},
+			out:  `{"service": "github", "name": "user/fakerepo", "send_build_status": false, "comment_on_pull_requests": false, "commit_status_fail_change_threshold": null, "commit_status_fail_threshold": null}`,
+		},
+		{
+			name: "partial",
+			in:   RepositoryConfig{Service: "github", Name: "user/fakerepo", SendBuildStatus: true, CommitStatusFailThreshold: pfloat64(10.3)},
+			out:  `{"service": "github", "name": "user/fakerepo", "send_build_status": true, "comment_on_pull_requests": false, "commit_status_fail_change_threshold": null, "commit_status_fail_threshold": 10.3}`,
+		},
+	}
+
+	for _, tt := range testCases {
+		t.Run(tt.name, func(t *testing.T) {
+			content, err := json.Marshal(tt.in)
+			assert.Nil(t, err)
+			assert.JSONEq(t, tt.out, string(content))
+		})
+	}
+}
+
 func ExampleRepositoryService_Get() {
 	// Instantiate the client with your _personal access token_
 	client := NewClient("your-personal-access-token")
@@ -100,4 +128,8 @@ func ExampleRepositoryService_Get() {
 	}
 
 	fmt.Printf("Project has ID %d in Coveralls", repository.ID)
+}
+
+func pfloat64(v float64) *float64 {
+	return &v
 }
