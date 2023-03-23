@@ -5,6 +5,7 @@ metadata:
   description: Client for Coveralls.io API written in Go
   annotations:
     github.com/project-slug: loadsmart/go-coveralls-api
+    opslevel.com/tier: tier_4
   tags:
     - go
 spec:
